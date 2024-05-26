@@ -16,12 +16,6 @@ body {
     padding: 20px;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #007bff;
-}
-
 nav ul {
     list-style-type: none;
     display: flex;

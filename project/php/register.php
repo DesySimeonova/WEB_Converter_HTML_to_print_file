@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
-    $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO users (username,email, password) VALUES (?, ?, ?)";
     if ($stmt = $mysqli->prepare($sql)) {
         $stmt->bind_param("sss", $username, $email, password_hash($password, PASSWORD_DEFAULT));
         if ($stmt->execute()) {

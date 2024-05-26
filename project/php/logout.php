@@ -2,6 +2,6 @@
 session_start();
 $_SESSION = array();
 session_destroy();
-header("location: ../login.html");
+header("location: ../index.html");
 exit;
 ?>
