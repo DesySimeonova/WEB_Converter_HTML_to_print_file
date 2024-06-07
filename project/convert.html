@@ -4,76 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Converter</title>
-    <link rel="stylesheet" href="css/convert.css">
+    <link rel="stylesheet" href="css/stylessConvert.css">
+    <script src="js/scripts.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>File Converter</h1>
+        <p><a href="home.html">Back to Home</a></p>
     </div>
     <div>
-        <p><a href="home.html">Back to Home</a></p>
-        <p>Click on the "Choose File" button to upload a file:</p>
-        <form action="">
-            <input type="file" id="fileInput" name="filename" style="display: none;">
-            <button onclick="document.getElementById('fileInput').click()">Choose File</button>
+        <p id="text">Click on the "Choose File" button to upload a file:</p>
+
+        <form id="fileForm">
+            <input type="file" id="fileInput" name="filename" accept=".html">
+            <button>Submit</button>
         </form>
+
+    </div>
+    <div>
+        <h2>File content:</h2>
+        <div id="content"></div>
     </div>
     <div>
         <h2> Advanced settings (optional)</h2>
-        <div>
-
+       
+        <div id="options">
+            <h3 id="settings">Page Settings</h3>
         
-            <p>Page Settings</p>
-
-             <label>Page size:</label>
-             <input list="types" name="type" id="type">
-             <datalist id="types">
-               <option value="value1">
-               <option value="value2">
-             </datalist>
-
-             <label>Page Orientation:</label>
-             <input list="types" name="type" id="type">
-             <datalist id="types">
-               <option value="value1">
-               <option value="value2">
-             </datalist>
-
-             <label>Maximum number of characters per page:</label>
-             <input type="text">
-
-             <label> Maximum number of words per page:</label>
-             <input type="text">
-
-               <!-- Идеята ми е тези 2те на 1 ред и да избира да се показват номера на страници или не  другите да са едно под друго-->
-
-             <label> Show page numbers:</label>
-             <input type="checkbox">
-
-             <label>Hide page numbers :</label>
-             <input type="checkbox">
-
-              <!-- Тук нещата да са като div или част от цялото в друг цвят като различни настройки да се отличават-->
-             <p>Option to show or hide line numbers, with the ability to:</p>
-
-              <!-- Идеята ми е тези 2те на 1 ред и да избира да се показват номера на страници или не  другите да са едно под друго-->
-             <label>Show line numbers</label>
-             <input type="radio">
-
-             <label>Hide line numbers</label>
-             <input type="radio">
-
-             <label>Numbering of all pages in the document</label>
-             <input type="checkbox">
-
-             <label>Numbering of current page in the document</label>
-             <input type="checkbox">
-              
-            <!--Това нз колко ще успеем да го реализираме с арабски цифри и т.н по-скоро поне шрифтове и главни малки букви да помислим да направим-->
-            <label>Different formats for page numbers (Arabic numerals, Roman numerals, Cyrillic/Latin lowercase/uppercase letters)</label>
-
-             <button type="submit">Apply to file</button>
+            <label>Page size:</label>
+            <input list="size" name="type" id="type">
+            <datalist id="size">
+                <option value="Auto - one long page">
+                <option value="Letter">
+                <option value="Legal">
+                <option value="A4">
+                <option value="A3">
+                <option value="A2">
+            </datalist>
+        
+            <label>Page Orientation:</label>
+            <input list="orientation" name="type" id="type">
+            <datalist id="orientation">
+                <option value="Portrait">
+                <option value="Landscape">
+            </datalist>
+        
+            <label>Maximum number of characters per page:</label>
+            <input type="text">
+        
+            <label>Maximum number of words per page:</label>
+            <input type="text">
+        
+            <div class="checkbox-group">
+                <label>Show page numbers:</label>
+                <input class="mark" type="checkbox">
+           
+                <label>Hide page numbers:</label>
+                <input class="mark" type="checkbox">
+            </div>
+        
+            <p>Option to show or hide line numbers, with the ability to:</p>
+        
+            <div class="radio-group">
+                <label>Show line numbers:</label>
+                <input class="mark" type="radio" name="line-numbers">
+        
+                <label>Hide line numbers:</label>
+                <input class="mark" type="radio" name="line-numbers">
+            </div>
+        
+            <div class="checkbox-group">
+            <label>Numbering of all pages in the document:</label>
+            <input class="mark" type="checkbox">
+            </div>
+        
+            <div class="checkbox-group">
+            <label>Numbering of current page in the document:</label>
+            <input class="mark" type="checkbox">
+            </div>
+        
+            <button type="submit">Apply to file</button>
         </div>
+        
 
     </div>
 </body>

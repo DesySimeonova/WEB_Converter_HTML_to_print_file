@@ -1,37 +1,38 @@
 <?php
-session_start();
-require_once "config.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
+    require_once("./login-func.php");
 
-    $sql = "SELECT id, username, password FROM users WHERE username = ?";
-    if ($stmt = $mysqli->prepare($sql)) {
-        $stmt->bind_param("s", $username);
-        if ($stmt->execute()) {
-            $stmt->store_result();
-            if ($stmt->num_rows == 1) {
-                $stmt->bind_result($id, $username, $hashed_password);
-                if ($stmt->fetch()) {
-                    if (password_verify($password, $hashed_password)) {
-                        session_start();
-                        $_SESSION["loggedin"] = true;
-                        $_SESSION["id"] = $id;
-                        $_SESSION["username"] = $username;
-                        header("location: ../home.html");
-                    } else {
-                        echo "The password you entered was not valid.";
-                    }
-                }
+    $post = json_decode(file_get_contents("php://input"), true);
+
+    if ($post && isset($post["username"]) && isset($post["password"])) {
+
+        try {
+
+            $user = login($post);
+
+            if ($user) {
+
+                session_start();
+                $_SESSION["user"] = $user;
+
+                setcookie("username", $post["username"], time() + 600);
+                setcookie("password", $post["password"], time() + 600);
+
+                echo json_encode(["status" => "SUCCESS", "message" => "Входът е успешен!"]); 
+
             } else {
-                echo "No account found with that username.";
+                http_response_code(400);
+                echo json_encode(["status" => "ERROR", "message" => "Входът е неуспешен!"]); 
             }
-        } else {
-            echo "Oops! Something went wrong. Please try again later.";
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["status" => "ERROR", "message" => $e->getMessage()]); 
         }
-        $stmt->close();
+
+    } else {
+        http_response_code(400);
+        echo json_encode(["status" => "ERROR", "message" => "Некоректни данни!"]); 
     }
-    $mysqli->close();
-}
+
 ?>
