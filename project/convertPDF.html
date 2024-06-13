@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter</title>
+    <link rel="stylesheet" href="css/convert.css">
+    <script src="js/convertPDF.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>File Converter</h1>
+        <p id="text">Click on the "Choose File" button to upload a file:</p>
+        <form id="fileForm">
+            <input type="file" id="fileInput" name="filename" accept=".html" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <form id="pdfForm" action="php/generatePDF.php" method="POST">
+        <h2>File content:</h2>
+        <div id="content"></div>
+        <input type="hidden" name="htmlContent" id="htmlContent">
+        <div>
+            <h2>Advanced settings (optional)</h2>
+            <div id="options">
+                <h3 id="settings">Page Settings</h3>
+                <label>Page size:</label>
+                <select id="pageSize" name="pageSize">
+                    <option value="Auto - one long page">Auto - one long page</option>
+                    <option value="Letter">Letter</option>
+                    <option value="Legal">Legal</option>
+                    <option value="A4">A4</option>
+                    <option value="A3">A3</option>
+                    <option value="A2">A2</option>
+                </select>
+                <label>Page Orientation:</label>
+                <select id="pageOrientation" name="pageOrientation">
+                    <option value="Portrait">Portrait</option>
+                    <option value="Landscape">Landscape</option>
+                </select>
+                <label>Maximum number of words per page:</label>
+                <input type="number" id="maxWords" name="maxWords">
+                <div class="radio-group">
+                    <label><input type="radio" name="pageNumberOption" value="show" id="showPageNumbers"> Show page numbers</label>
+                    <label><input type="radio" name="pageNumberOption" value="remove" id="removePageNumbers"> Remove page numbers</label>
+                </div>
+                <div class="radio-group">
+                    <label><input type="radio" name="lineNumberOption" value="show" id="showLineNumbers"> Show line numbers</label>
+                    <label><input type="radio" name="lineNumberOption" value="remove" id="removeLineNumbers"> Remove line numbers</label>
+                </div>
+                <button id="applySettings" type="button">Apply to file</button>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Generate PDF</button>
+        </div>
+    </form>
+</body>
+</html>
