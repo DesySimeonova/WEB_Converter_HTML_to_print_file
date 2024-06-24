@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>File Converter</h1>
+        <h1>HTML to PDF Converter</h1>
         <p id="text">Click on the "Choose File" button to upload a file:</p>
         <form id="fileForm">
             <input type="file" id="fileInput" name="filename" accept=".html" required>
@@ -45,15 +45,13 @@
                     <option value="Times-Roman">Times-Roman</option>
                     <option value="Courier">Courier</option>
                 </select>
+                <label for="fontSize">Font Size (pt):</label>
+                <input type="number" id="fontSize" name="fontSize" value="14">
                 <label>Maximum number of words per page:</label>
                 <input type="number" id="maxWords" name="maxWords">
                 <div class="radio-group">
                     <label><input type="radio" name="pageNumberOption" value="show" id="showPageNumbers"> Show page numbers</label>
-                    <label><input type="radio" name="pageNumberOption" value="remove" id="removePageNumbers"> Remove page numbers</label>
-                </div>
-                <div class="radio-group">
-                    <label><input type="radio" name="lineNumberOption" value="show" id="showLineNumbers"> Show line numbers</label>
-                    <label><input type="radio" name="lineNumberOption" value="remove" id="removeLineNumbers"> Remove line numbers</label>
+                    <label><input type="radio" name="pageNumberOption" value="remove" id="removePageNumbers" checked> Remove page numbers</label>
                 </div>
             </div>
         </div>
