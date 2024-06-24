@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Converter</title>
-    <link rel="stylesheet" href="css/convert.css">
-    <script src="js/convert_pdf.js"></script>
+    <link rel="stylesheet" href="css/convertPDF.css">
+    <script src="js/convertPdf.js"></script>
 </head>
 <body>
     <div class="container">
+        <p><a href="home.html">Back to Home</a></p>
         <h1>HTML to PDF Converter</h1>
         <p id="text">Click on the "Choose File" button to upload a file:</p>
         <form id="fileForm">
             <input type="file" id="fileInput" name="filename" accept=".html" required>
-            <button type="submit">Submit</button>
+            <button id="submitHTML" type="submit">Submit</button>
         </form>
     </div>
     <form id="pdfForm" action="php/generatePDF.php" method="POST">
@@ -46,7 +47,7 @@
                     <option value="Courier">Courier</option>
                 </select>
                 <label for="fontSize">Font Size (pt):</label>
-                <input type="number" id="fontSize" name="fontSize" value="14">
+                <input type="number" id="fontSize" name="fontSize" value="12">
                 <label>Maximum number of words per page:</label>
                 <input type="number" id="maxWords" name="maxWords">
                 <div class="radio-group">
@@ -56,7 +57,7 @@
             </div>
         </div>
         <div>
-            <button type="submit">Generate PDF</button>
+            <button id="generatePDF" type="submit">Generate PDF</button>
         </div>
     </form>
 </body>

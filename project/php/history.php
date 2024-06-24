@@ -1,67 +1,30 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require_once("db.php");
+
 session_start();
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    die("You are not logged in.");
+
+if (!isset($_SESSION["user"])) {
+    http_response_code(401);
+    exit(json_encode(["status" => "ERROR", "message" => "Потребителят не е оторизиран"]));
 }
 
-if (!isset($_SESSION["id"])) {
-    die("User ID is not set in session.");
+try {
+    $db = new DB();
+    $connection = $db->getConnection();
+
+    $sql = "SELECT filename, converted_at FROM users_history";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(["status" => "SUCCESS", "data" => $result]);
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(["status" => "ERROR", "message" => "Грешка при извличане на данни: " . $e->getMessage()]);
 }
 
-
-$conn = new mysqli("localhost", "root", "", "web_app_db");
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$table_check = $conn->query("SHOW TABLES LIKE 'history'");
-if ($table_check->num_rows == 0) {
-    die("Table 'history' doesn't exist in the database.");
-}
-
-$stmt = $conn->prepare("SELECT filename, converted_at FROM history WHERE user_id = ? ORDER BY converted_at DESC");
-if ($stmt === false) {
-    die("Prepare failed: " . $conn->error);
-}
-
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$stmt->store_result();
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Converted Files History</title>
-    <link rel="stylesheet" href="css/history.css">
-</head>
-<body>
-    <div class="container">
-        <h1>History of Converted Files</h1>
-        <p><a href="home.php">Back to Home</a></p>
-        <div id="history-content">
-            <?php
-            if ($stmt->num_rows === 0) {
-                echo "There is no current history.";
-            } else {
-                echo "<table>";
-                $stmt->bind_result($filename, $converted_at);
-                while ($stmt->fetch()) {
-                    echo "<tr><td>" . htmlspecialchars($filename) . "</td><td>" . htmlspecialchars($converted_at) . "</td></tr>";
-                }
-                echo "</table>";
-            }
-            ?>
-        </div>
-    </div>
-</body>
-</html>
-
-<?php
-$stmt->close();
-$conn->close();
 ?>

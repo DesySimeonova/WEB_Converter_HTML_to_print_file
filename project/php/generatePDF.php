@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pageSize = isset($_POST['pageSize']) ? $_POST['pageSize'] : 'Letter';
     $pageOrientation = isset($_POST['pageOrientation']) ? $_POST['pageOrientation'] : 'Portrait';
     $fontSelection = isset($_POST['fontSelection']) ? $_POST['fontSelection'] : 'Helvetica';
-    $fontSize = isset($_POST['fontSize']) ? $_POST['fontSize'] : 14;
+    $fontSize = isset($_POST['fontSize']) ? $_POST['fontSize'] : 12;
 
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
