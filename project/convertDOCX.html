@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter</title>
+    <link rel="stylesheet" href="css/convertDOCX.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@6.0.2/build/index.min.js"></script>
+    <script src="js/convertDOCX.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Конвертиране на HTML в DOCX</h1>
+
+        <p id="text">Кликнете върху бутона "Избор на файл", за да прикачите файл:</p>
+
+        <form id="fileForm">
+            <input type="file" id="fileInput" name="filename" accept=".html" required>
+            <button id="submitHTML" type="submit">Качи файла</button>
+        </form>
+    
+    <h2>Съдържание на файла:</h2>
+    <div id="content"></div>
+    <hr>
+    <div>
+        <button id="downloadDocx" type="button">Изтегли като .docx</button>
+    </div>
+    <hr>
+    <nav>
+        <ul>
+            <li><a href="home.html">Назад</a></li>
+        </ul>
+    </nav>
+
+</div>
+</body>
+</html>
